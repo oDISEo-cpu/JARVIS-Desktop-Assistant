@@ -18,8 +18,6 @@ from config import (
     GREETING,
     INPUT_MODE,
     USUARIO_TRATO,
-    WEB_CHAT_HOST,
-    WEB_CHAT_PORT,
     config,
 )
 from core.brain import Brain, ensure_message_str
@@ -39,11 +37,9 @@ class JarvisAssistant:
         self,
         input_mode: str | None = None,
         dry_run: bool = False,
-        web_mode: bool = False,
     ) -> None:
         self.input_mode = input_mode or INPUT_MODE
         self.dry_run = dry_run
-        self.web_mode = web_mode
 
         self.ui = ConsoleUI()
         self.chat = ChatReader(console=self.ui.console)
@@ -67,7 +63,6 @@ class JarvisAssistant:
         # Subsistemas opcionales — carga perezosa, nunca crashea
         self._speaker: Any = None
         self._listener: Any = None
-        self._web_chat: Any = None
         self._running = False
 
     def _load_voice_modules(self) -> None:
@@ -86,58 +81,13 @@ class JarvisAssistant:
         except Exception:
             self._listener = None
 
-    def _load_web_chat(self) -> None:
-        if not self.web_mode:
-            return
-        try:
-            from ui.web_chat import WebChat
-            self._web_chat = WebChat(
-                host=WEB_CHAT_HOST,
-                port=WEB_CHAT_PORT,
-                message_handler=self._handle_web_message,
-            )
-        except Exception as exc:
-            self.ui.show_error(f"Web chat no disponible: {exc}")
-            self._web_chat = None
-
     def _handle_web_message(self, user_text: str) -> dict[str, Any]:
         """
         Procesa un mensaje del chat web y devuelve respuesta estructurada.
         Usado por POST /api/chat y WebSocket /ws.
+        DEPRECATED: Interfaz web eliminada según reglas del proyecto.
         """
-        if self._should_exit(user_text):
-            farewell = f"{FAREWELL} Hasta pronto, {USUARIO_TRATO}."
-            self._running = False
-            return {"reply": farewell, "actions": [], "exit": True}
-
-        if user_text.strip().lower() in ("/diag", "diag"):
-            report = self.brain.run_diagnostics()
-            lines = "\n".join(report.lines)
-            return {"reply": f"Diagnóstico LLM:\n{lines}", "actions": [], "exit": False}
-
-        try:
-            response = self.brain.process(user_text)
-        except Exception as exc:
-            return {
-                "reply": f"Me temo que ocurrió un error, {USUARIO_TRATO}: {exc}",
-                "actions": [],
-            }
-
-        execution_result = ""
-        actions: list[dict[str, Any]] = []
-
-        if response.type == "action" and response.steps:
-            actions = response.steps
-            execution_result = self.executor.execute_plan(response.steps, response.reasoning or "")
-            if execution_result and "✗" not in execution_result:
-                self.memory.set_last_plan(response.steps, response.reasoning or "")
-
-        safe_message = ensure_message_str(response.message, response.steps)
-        reply = safe_message
-        if execution_result:
-            reply = f"{safe_message}\n\n{execution_result}"
-
-        return {"reply": reply, "actions": actions, "exit": False}
+        raise NotImplementedError("Interfaz web eliminada. JARVIS es solo terminal.")
 
     @property
     def speaker_available(self) -> bool:
@@ -204,24 +154,14 @@ class JarvisAssistant:
             )
 
         self._load_voice_modules()
-        self._load_web_chat()
 
-        if self.web_mode and self._web_chat:
-            self.chat.add_system_message(f"Chat web disponible en {self._web_chat.url}")
-
-        # En modo web puro no duplicar saludo en terminal (el HTML ya lo muestra)
-        if not self.web_mode:
-            suggestion = self.memory.get_startup_suggestion()
-            greeting = GREETING
-            if suggestion:
-                greeting = f"{GREETING}\n\n{suggestion}"
-            self.chat.add_jarvis_message(greeting)
-            if self.speaker_available and self.input_mode != "text":
-                self._speaker.speak_async(greeting.split("\n")[0])
-        else:
-            suggestion = self.memory.get_startup_suggestion()
-            if suggestion:
-                self.chat.add_system_message(suggestion)
+        suggestion = self.memory.get_startup_suggestion()
+        greeting = GREETING
+        if suggestion:
+            greeting = f"{GREETING}\n\n{suggestion}"
+        self.chat.add_jarvis_message(greeting)
+        if self.speaker_available and self.input_mode != "text":
+            self._speaker.speak_async(greeting.split("\n")[0])
 
     def _should_exit(self, text: str) -> bool:
         text_lower = text.lower().strip()
@@ -229,13 +169,6 @@ class JarvisAssistant:
 
     def _get_input_text(self) -> str | None:
         """Obtiene entrada según el modo configurado."""
-        # Modo web: priorizar mensajes del navegador
-        if self.web_mode and self._web_chat:
-            web_msg = self._web_chat.wait_for_message(timeout=0.3)
-            if web_msg:
-                self.chat.add_user_message(web_msg)
-                return web_msg
-
         use_voice = self.input_mode in ("voice", "hybrid") and self.listener_available
 
         if use_voice and self.input_mode == "voice":
@@ -267,8 +200,6 @@ class JarvisAssistant:
             self.chat.add_jarvis_message(farewell)
             if self.speaker_available:
                 self._speaker.speak(farewell)
-            if self.web_mode and self._web_chat:
-                self._web_chat.broadcast("jarvis", farewell)
             return False
 
         if user_text.strip().lower() in ("/diag", "diag"):
@@ -317,8 +248,6 @@ class JarvisAssistant:
             final_message = f"{safe_message}\n\n{execution_result}"
 
         self.chat.add_jarvis_message(final_message)
-        if self.web_mode and self._web_chat:
-            self._web_chat.broadcast("jarvis", final_message)
 
         if self.speaker_available and self.input_mode != "text":
             short = safe_message.split("\n")[0]
