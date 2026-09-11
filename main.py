@@ -256,22 +256,11 @@ class JarvisAssistant:
         return True
 
     def run(self) -> None:
-        """Bucle principal — en --web uvicorn es el proceso principal."""
+        """Bucle principal de terminal."""
         try:
             self.initialize()
         except Exception as exc:
             self.ui.show_error(f"Error en inicialización (continuando): {exc}")
-
-        # Modo web: uvicorn bloquea aquí; no ejecutar bucle de terminal
-        if self.web_mode and self._web_chat:
-            self.chat.add_system_message(
-                f"Iniciando servidor web en {self._web_chat.url} — Ctrl+C para salir."
-            )
-            try:
-                self._web_chat.run_blocking()
-            except KeyboardInterrupt:
-                self.chat.add_system_message("Servidor web detenido.")
-            return
 
         self._run_terminal_loop()
 
@@ -313,10 +302,6 @@ def parse_args() -> argparse.Namespace:
         "--dry-run", action="store_true",
         help="Genera planes sin ejecutar acciones",
     )
-    parser.add_argument(
-        "--web", action="store_true",
-        help="Activa chat web en http://localhost:8000",
-    )
     return parser.parse_args()
 
 
@@ -326,7 +311,6 @@ def main() -> None:
     assistant = JarvisAssistant(
         input_mode=args.input_mode,
         dry_run=args.dry_run,
-        web_mode=args.web,
     )
     assistant.run()
 

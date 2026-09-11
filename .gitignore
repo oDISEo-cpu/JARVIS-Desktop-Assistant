@@ -1,12 +1,16 @@
 ```
-# Compiled Python files
-*.pyc
+# Python
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
 
 # Dependencies
-.venv/
 venv/
-node_modules/
+.venv/
+.env
+.env.local
+*.env.*
 
 # Logs and temp files
 *.log
@@ -16,8 +20,7 @@ node_modules/
 .vscode/
 .idea/
 
-# Environment files
-.env
-.env.local
-*.env.*
+# OS
+.DS_Store
+Thumbs.db
 ```
