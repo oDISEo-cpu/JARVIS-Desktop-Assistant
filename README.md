@@ -1,61 +1,179 @@
-# JARVIS-Desktop-Assistant
-🤖 Tu propio J.A.R.V.I.S de escritorio: asistente con IA 100% local (Ollama + Gemma/Qwen) que entiende lenguaje natural, ejecuta tareas en tu PC y automatiza flujos de trabajo. Privado, offline y extensible.
+# JARVIS — Asistente Virtual estilo Iron Man
 
-# 🤖 J.A.R.V.I.S — Asistente Personal de Escritorio
+Asistente de escritorio modular en Python con conversación natural, control de PC y degradación elegante. Funciona **100% por texto** sin instalar dependencias de voz.
 
-> Un asistente de inteligencia artificial inspirado en el mítico mayordomo digital de Iron Man.
-> Vive en tu PC, entiende lenguaje natural y ejecuta tareas por ti — con IA 100% local, sin nube ni APIs externas.
+## Requisitos
 
-![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)
-![Ollama](https://img.shields.io/badge/IA-Ollama_•_Gemma_•_Qwen-111111)
-![Estado](https://img.shields.io/badge/estado-en_desarrollo_🚧-yellow)
-![Privacidad](https://img.shields.io/badge/privacidad-100%25_local-green)
+- **Windows 10/11** (optimizado; partes funcionan en Linux/macOS)
+- **Python 3.11+**
+- Conexión a internet (solo si usa OpenAI/Anthropic; Ollama funciona offline)
 
-## ✨ ¿Qué es?
+## Instalación rápida (PowerShell)
 
-JARVIS interpreta solicitudes en lenguaje natural como:
+```powershell
+cd "C:\Users\HomePC\Documents\Asistente 3.0\jarvis"
+.\scripts\setup.ps1
+```
 
-- *"Abre mi editor de código"*
-- *"Organiza mi carpeta de descargas"*
-- *"Resume este documento"*
-- *"¿Qué procesos están consumiendo más RAM?"*
+El script `setup.ps1`:
+1. Crea un entorno virtual `.venv`
+2. Instala `requirements.txt` (sin voz)
+3. Copia `.env.example` → `.env` si no existe
 
-...y las ejecuta directamente en tu equipo usando modelos de lenguaje locales
-(**Gemma** y **Qwen** a través de **Ollama**). Sin enviar un solo byte a la nube. 🔒
+### Instalación manual
 
-##  Características
-
-- 🧠 **Comprensión de lenguaje natural** con LLMs locales
-- ⚡ **Ejecución de tareas locales**: apps, archivos, scripts y automatizaciones
-- 🔒 **Privacidad total**: todo el procesamiento ocurre en tu máquina
-- 🧩 **Arquitectura extensible**: sistema de comandos/plugins fácil de ampliar
-- 🎯 **Prompt Engineering** especializado para parseo de intenciones (intent parsing)
-
-## 🛠️ Tech Stack
-
-| Capa        | Tecnología                              |
-|-------------|------------------------------------------|
-| Lenguaje    | Python 3.10+                             |
-| Runtime IA  | Ollama                                   |
-| Modelos     | Gemma, Qwen                              |
-| Técnicas    | Prompt Engineering, intent parsing       |
-
-## 📦 Instalación
-
-```bash
-# 1. Clona el repo
-git clone https://github.com/oDISEo-cpu/JARVIS-Desktop-Assistant.git
-cd JARVIS-Desktop-Assistant
-
-# 2. Instala Ollama y descarga un modelo
-#    https://ollama.com
-ollama pull gemma3
-
-# 3. Crea el entorno virtual e instala dependencias
-python -m venv venv
-source venv/bin/activate   # Linux/Mac
-venv\Scripts\activate      # Windows
+```powershell
+cd jarvis
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
+copy .env.example .env
+```
 
-# 4. Ejecuta a JARVIS
+## Configuración (.env)
+
+Edite `.env` con su editor favorito:
+
+```env
+JARVIS_INPUT_MODE=text
+USUARIO_TRATO=señor
+LLM_PROVIDER=openai
+OPENAI_API_KEY=sk-su-clave-aqui
+```
+
+### Proveedores LLM
+
+| Proveedor | Variables | Costo |
+|-----------|-----------|-------|
+| **OpenAI** | `LLM_PROVIDER=openai`, `OPENAI_API_KEY` | De pago |
+| **Anthropic** | `LLM_PROVIDER=anthropic`, `ANTHROPIC_API_KEY` | De pago |
+| **Ollama** | `LLM_PROVIDER=ollama`, `LLM_MODEL=llama3.2` | **Gratis, local** |
+
+### Ollama (uso gratis local)
+
+```powershell
+# 1. Instalar Ollama desde https://ollama.com
+# 2. Descargar un modelo
+ollama pull llama3.2
+
+# 3. Configurar .env
+LLM_PROVIDER=ollama
+LLM_MODEL=llama3.2
+OLLAMA_BASE_URL=http://localhost:11434
+```
+
+## Ejecución
+
+### Modo texto (default)
+
+```powershell
 python main.py
+```
+
+Interfaz de chat en terminal con Rich. No requiere micrófono ni PyAudio.
+
+### Modo dry-run (simular acciones)
+
+```powershell
+python main.py --dry-run
+```
+
+Genera planes y muestra el JSON del LLM **sin ejecutar nada** en el sistema.
+
+### Chat web
+
+```powershell
+python main.py --web
+```
+
+Abre un chat en el navegador: **http://localhost:8000**
+
+Combina con otros modos:
+
+```powershell
+python main.py --web --dry-run
+```
+
+### Modo voz (opcional)
+
+Requiere dependencias extra:
+
+```powershell
+pip install -r requirements-voice.txt
+python main.py --input-mode voice
+```
+
+Modo híbrido (voz + texto):
+
+```powershell
+python main.py --input-mode hybrid
+```
+
+## Comandos útiles dentro de JARVIS
+
+| Comando | Descripción |
+|---------|-------------|
+| `ayuda` | Lista capacidades (modo básico) |
+| `/rutinas` o `rutinas` | Muestra patrones detectados |
+| `salir` / `hasta luego` | Cierra JARVIS |
+
+## Modo básico (sin LLM)
+
+Si no hay API key, internet o cuota agotada, JARVIS activa **modo básico** con comandos por palabras clave:
+
+- "abre notepad"
+- "busca informe.pdf"
+- "busca en google Python tutorial"
+- "lista ventanas abiertas"
+- "bloquea pantalla"
+- "apaga el pc" (con confirmación)
+
+## Rutinas automáticas
+
+JARVIS registra sus acciones y detecta patrones. Si repite la misma acción 3+ veces en horarios similares, la sugiere al iniciar:
+
+> *"Son las 08:00. ¿Abro su espacio de trabajo habitual?"*
+
+## Tests
+
+```powershell
+pip install pytest
+python -m pytest tests/ -v
+```
+
+Los tests usan dry-run y mocks — **no tocan el sistema real**.
+
+## Estructura del proyecto
+
+```
+jarvis/
+├── main.py              # Punto de entrada
+├── config.py            # Configuración global
+├── core/
+│   ├── brain.py         # Motor LLM + modo básico
+│   ├── personality.py   # Personalidad JARVIS
+│   ├── memory.py        # Memoria y rutinas (SQLite)
+│   └── subsystems.py    # Chequeo de módulos
+├── action/              # Control de PC
+├── perception/          # Entrada texto/voz
+├── ui/web_chat.py       # Chat web
+├── security/guard.py    # Whitelist y confirmaciones
+├── scripts/setup.ps1    # Instalador Windows
+└── tests/test_safe.py   # Tests seguros
+```
+
+## Seguridad
+
+- Comandos destructivos requieren confirmación explícita
+- Whitelist de comandos shell en `config.py`
+- Log de acciones en `logs/actions.log`
+- `--dry-run` para validar planes sin riesgo
+
+## Solución de problemas
+
+| Problema | Solución |
+|----------|----------|
+| "Modo básico activo" | Configure API key en `.env` o use Ollama |
+| Error de micrófono | Use `JARVIS_INPUT_MODE=text` (default) |
+| Ollama no responde | Verifique que `ollama serve` esté corriendo |
+| PyAudio falla | Solo necesario para voz; omita `requirements-voice.txt` |

@@ -1,0 +1,78 @@
+2026-08-13 06:52:58,595 | [OK] list_windows | params={} | result=Ventanas abiertas (12):
+- Cursor Agents
+- Qwen
+- Documentos - Explorador de archivos
+- API keys | Google AI Studio - Brave
+- ‎Pelis y series @ ‎Diego (666933)
+- Trabajo de desarrollador en remoto | Em
+2026-08-13 06:52:58,799 | [OK] get_volume | params={} | result=No pude leer el volumen: 'AudioDevice' object has no attribute 'Activate'
+2026-08-13 06:52:58,832 | [OK] run_command | params={'cmd': 'echo Hola JARVIS'} | result=Hola JARVIS
+2026-08-13 07:28:07,438 | [OK] run_command | params={'cmd': 'echo test'} | result=[DRY-RUN] run_command({'cmd': 'echo test'})
+2026-08-13 07:28:07,453 | [OK] open_app | params={'name': 'notepad'} | result=[DRY-RUN] open_app({'name': 'notepad'})
+2026-08-13 07:28:07,470 | [OK] open_app | params={'name': 'calc'} | result=[DRY-RUN] open_app({'name': 'calc'})
+2026-08-13 07:28:07,470 | [OK] web_search | params={'query': 'test'} | result=[DRY-RUN] web_search({'query': 'test'})
+2026-08-13 07:28:07,628 | CONFIRMATION | msg=Ejecutar 'delete_file' con parámetros {'path': '/tmp/test.txt'} | confirmed=False
+2026-08-13 07:28:07,629 | CONFIRMATION | msg=Ejecutar 'delete_file' con parámetros {'path': '/tmp/test.txt'} | confirmed=True
+2026-08-13 07:29:02,925 | [OK] open_app | params={'name': 'notepad'} | result=[DRY-RUN] open_app({'name': 'notepad'})
+2026-08-13 08:02:55,589 | [OK] create_folder | params={'path': '/Escritorio/prueba_jarvis'} | result=Carpeta creada: \Escritorio\prueba_jarvis
+2026-08-13 08:10:32,171 | [OK] run_command | params={'cmd': 'echo test'} | result=[DRY-RUN] run_command({'cmd': 'echo test'})
+2026-08-13 08:10:32,191 | [OK] open_app | params={'name': 'notepad'} | result=[DRY-RUN] open_app({'name': 'notepad'})
+2026-08-13 08:10:32,227 | [OK] open_app | params={'name': 'calc'} | result=[DRY-RUN] open_app({'name': 'calc'})
+2026-08-13 08:10:32,227 | [OK] web_search | params={'query': 'test'} | result=[DRY-RUN] web_search({'query': 'test'})
+2026-08-13 08:10:32,414 | CONFIRMATION | msg=Ejecutar 'delete_file' con parámetros {'path': '/tmp/test.txt'} | confirmed=False
+2026-08-13 08:10:32,414 | CONFIRMATION | msg=Ejecutar 'delete_file' con parámetros {'path': '/tmp/test.txt'} | confirmed=True
+2026-08-13 08:22:58,147 | [OK] open_app | params={'name': 'Google Chrome'} | result=Comando 'Google Chrome' ejecutado
+2026-08-13 08:22:58,495 | [OK] type_text | params={'text': 'hora actual'} | result=Texto escrito: 'hora actual'
+2026-08-13 08:23:46,127 | [OK] open_app | params={'name': 'Google Chrome'} | result=Comando 'Google Chrome' ejecutado
+2026-08-13 08:29:59,109 | [OK] open_app | params={'name': 'chrome'} | result=[DRY-RUN] open_app({'name': 'chrome'})
+2026-08-13 08:29:59,137 | [OK] web_search | params={'query': 'clima'} | result=[DRY-RUN] web_search({'query': 'clima'})
+2026-08-13 08:29:59,341 | [OK] open_app | params={'name': 'notepad'} | result=[DRY-RUN] open_app({'name': 'notepad'})
+2026-08-13 08:29:59,341 | [OK] web_search | params={'query': 'hora'} | result=[DRY-RUN] web_search({'query': 'hora'})
+2026-08-13 08:29:59,393 | [OK] run_command | params={'cmd': 'echo test'} | result=[DRY-RUN] run_command({'cmd': 'echo test'})
+2026-08-13 08:29:59,418 | [OK] open_app | params={'name': 'notepad'} | result=[DRY-RUN] open_app({'name': 'notepad'})
+2026-08-13 08:29:59,444 | [OK] open_app | params={'name': 'calc'} | result=[DRY-RUN] open_app({'name': 'calc'})
+2026-08-13 08:29:59,445 | [OK] web_search | params={'query': 'test'} | result=[DRY-RUN] web_search({'query': 'test'})
+2026-08-13 08:29:59,617 | CONFIRMATION | msg=Ejecutar 'delete_file' con parámetros {'path': '/tmp/test.txt'} | confirmed=False
+2026-08-13 08:29:59,620 | CONFIRMATION | msg=Ejecutar 'delete_file' con parámetros {'path': '/tmp/test.txt'} | confirmed=True
+2026-08-13 08:30:21,082 | [OK] open_app | params={'name': 'chrome'} | result=[DRY-RUN] open_app({'name': 'chrome'})
+2026-08-13 08:30:21,108 | [OK] web_search | params={'query': 'clima'} | result=[DRY-RUN] web_search({'query': 'clima'})
+2026-08-13 08:30:21,133 | [OK] open_app | params={'name': 'notepad'} | result=[DRY-RUN] open_app({'name': 'notepad'})
+2026-08-13 08:30:21,133 | [OK] web_search | params={'query': 'hora'} | result=[DRY-RUN] web_search({'query': 'hora'})
+2026-08-13 08:30:21,175 | [OK] run_command | params={'cmd': 'echo test'} | result=[DRY-RUN] run_command({'cmd': 'echo test'})
+2026-08-13 08:30:21,193 | [OK] open_app | params={'name': 'notepad'} | result=[DRY-RUN] open_app({'name': 'notepad'})
+2026-08-13 08:30:21,210 | [OK] open_app | params={'name': 'calc'} | result=[DRY-RUN] open_app({'name': 'calc'})
+2026-08-13 08:30:21,211 | [OK] web_search | params={'query': 'test'} | result=[DRY-RUN] web_search({'query': 'test'})
+2026-08-13 08:30:21,347 | CONFIRMATION | msg=Ejecutar 'delete_file' con parámetros {'path': '/tmp/test.txt'} | confirmed=False
+2026-08-13 08:30:21,349 | CONFIRMATION | msg=Ejecutar 'delete_file' con parámetros {'path': '/tmp/test.txt'} | confirmed=True
+2026-08-13 08:31:59,744 | [OK] open_app | params={'name': 'Chrome y busca la hora actual en venezuela'} | result=Comando 'Chrome y busca la hora actual en venezuela' ejecutado
+2026-08-13 08:32:40,057 | [OK] open_app | params={'name': 'Chrome y busca la hora actual en venezuela'} | result=Comando 'Chrome y busca la hora actual en venezuela' ejecutado
+2026-08-13 08:37:15,272 | [OK] open_app | params={'name': 'chrome'} | result=[DRY-RUN] open_app({'name': 'chrome'})
+2026-08-13 08:37:15,297 | [OK] web_search | params={'query': 'clima'} | result=[DRY-RUN] web_search({'query': 'clima'})
+2026-08-13 08:37:15,328 | [OK] open_app | params={'name': 'notepad'} | result=[DRY-RUN] open_app({'name': 'notepad'})
+2026-08-13 08:37:15,328 | [OK] web_search | params={'query': 'hora'} | result=[DRY-RUN] web_search({'query': 'hora'})
+2026-08-13 08:37:15,364 | [OK] run_command | params={'cmd': 'echo test'} | result=[DRY-RUN] run_command({'cmd': 'echo test'})
+2026-08-13 08:37:15,380 | [OK] open_app | params={'name': 'notepad'} | result=[DRY-RUN] open_app({'name': 'notepad'})
+2026-08-13 08:37:15,396 | [OK] open_app | params={'name': 'calc'} | result=[DRY-RUN] open_app({'name': 'calc'})
+2026-08-13 08:37:15,396 | [OK] web_search | params={'query': 'test'} | result=[DRY-RUN] web_search({'query': 'test'})
+2026-08-13 08:37:15,597 | CONFIRMATION | msg=Ejecutar 'delete_file' con parámetros {'path': '/tmp/test.txt'} | confirmed=False
+2026-08-13 08:37:15,602 | CONFIRMATION | msg=Ejecutar 'delete_file' con parámetros {'path': '/tmp/test.txt'} | confirmed=True
+2026-08-13 09:34:43,282 | [OK] open_app | params={'name': 'chrome'} | result=[DRY-RUN] open_app({'name': 'chrome'})
+2026-08-13 09:34:43,307 | [OK] web_search | params={'query': 'clima'} | result=[DRY-RUN] web_search({'query': 'clima'})
+2026-08-13 09:34:43,332 | [OK] open_app | params={'name': 'notepad'} | result=[DRY-RUN] open_app({'name': 'notepad'})
+2026-08-13 09:34:43,332 | [OK] web_search | params={'query': 'hora'} | result=[DRY-RUN] web_search({'query': 'hora'})
+2026-08-13 09:34:43,373 | [OK] run_command | params={'cmd': 'echo test'} | result=[DRY-RUN] run_command({'cmd': 'echo test'})
+2026-08-13 09:34:43,388 | [OK] open_app | params={'name': 'notepad'} | result=[DRY-RUN] open_app({'name': 'notepad'})
+2026-08-13 09:34:43,407 | [OK] open_app | params={'name': 'calc'} | result=[DRY-RUN] open_app({'name': 'calc'})
+2026-08-13 09:34:43,407 | [OK] web_search | params={'query': 'test'} | result=[DRY-RUN] web_search({'query': 'test'})
+2026-08-13 09:34:43,540 | CONFIRMATION | msg=Ejecutar 'delete_file' con parámetros {'path': '/tmp/test.txt'} | confirmed=False
+2026-08-13 09:34:43,542 | CONFIRMATION | msg=Ejecutar 'delete_file' con parámetros {'path': '/tmp/test.txt'} | confirmed=True
+2026-08-13 10:31:48,742 | [OK] open_app | params={'name': 'chrome'} | result=[DRY-RUN] open_app({'name': 'chrome'})
+2026-08-13 10:31:57,478 | [OK] web_search | params={'query': 'clima'} | result=[DRY-RUN] web_search({'query': 'clima'})
+2026-08-13 10:32:30,457 | [OK] open_app | params={'name': 'notepad'} | result=[DRY-RUN] open_app({'name': 'notepad'})
+2026-08-13 10:32:30,458 | [OK] web_search | params={'query': 'hora'} | result=[DRY-RUN] web_search({'query': 'hora'})
+2026-08-13 10:32:30,502 | [OK] run_command | params={'cmd': 'echo test'} | result=[DRY-RUN] run_command({'cmd': 'echo test'})
+2026-08-13 10:32:30,524 | [OK] open_app | params={'name': 'notepad'} | result=[DRY-RUN] open_app({'name': 'notepad'})
+2026-08-13 10:32:30,539 | [OK] open_app | params={'name': 'calc'} | result=[DRY-RUN] open_app({'name': 'calc'})
+2026-08-13 10:32:30,540 | [OK] web_search | params={'query': 'test'} | result=[DRY-RUN] web_search({'query': 'test'})
+2026-08-13 10:32:30,682 | CONFIRMATION | msg=Ejecutar 'delete_file' con parámetros {'path': '/tmp/test.txt'} | confirmed=False
+2026-08-13 10:32:30,685 | CONFIRMATION | msg=Ejecutar 'delete_file' con parámetros {'path': '/tmp/test.txt'} | confirmed=True

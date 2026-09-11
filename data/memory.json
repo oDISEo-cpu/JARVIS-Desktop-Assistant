@@ -1,0 +1,195 @@
+{
+  "conversation": [
+    {
+      "role": "user",
+      "content": "﻿abre notepad",
+      "timestamp": "2026-08-13T11:29:02.922097+00:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Enseguida, señor. Abriré notepad.",
+      "timestamp": "2026-08-13T11:29:02.922097+00:00"
+    },
+    {
+      "role": "user",
+      "content": "Hola, ¿quién eres?",
+      "timestamp": "2026-08-13T12:00:04.962669+00:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Soy J.A.R.V.I.S., el asistente personal de su hogar. Estoy aquí para ayudarlo en cualquier cosa que necesite.",
+      "timestamp": "2026-08-13T12:00:49.692741+00:00"
+    },
+    {
+      "role": "user",
+      "content": "Hola, crea una carpeta llamada prueba_jarvis en mi Escritorio",
+      "timestamp": "2026-08-13T12:02:43.962553+00:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Crearé la carpeta 'prueba_jarvis' en su escritorio.",
+      "timestamp": "2026-08-13T12:02:55.586671+00:00"
+    },
+    {
+      "role": "user",
+      "content": "hola que tal?",
+      "timestamp": "2026-08-13T12:06:52.712350+00:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Estoy funcionando correctamente, gracias por preguntar. ¿En qué puedo ayudarte hoy?",
+      "timestamp": "2026-08-13T12:07:01.975844+00:00"
+    },
+    {
+      "role": "user",
+      "content": "que hora es en venezuela?",
+      "timestamp": "2026-08-13T12:20:41.835894+00:00"
+    },
+    {
+      "role": "assistant",
+      "content": "La hora actual en Venezuela es la misma que la de su ubicación actual. Si desea saber la hora exacta, puede buscar 'hora actual' o 'hora en [ciudad]' en un motor de búsqueda.",
+      "timestamp": "2026-08-13T12:21:15.806297+00:00"
+    },
+    {
+      "role": "user",
+      "content": "bueno abre y busca en google chrome y muestrame la hora",
+      "timestamp": "2026-08-13T12:22:39.355073+00:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Abrir Google Chrome y buscar la hora actual",
+      "timestamp": "2026-08-13T12:22:58.110746+00:00"
+    },
+    {
+      "role": "user",
+      "content": "vuelvelo a hacer",
+      "timestamp": "2026-08-13T12:23:33.603215+00:00"
+    },
+    {
+      "role": "assistant",
+      "content": {
+        "tool": "open_app",
+        "params": {
+          "name": "Google Chrome"
+        }
+      },
+      "timestamp": "2026-08-13T12:23:46.110051+00:00"
+    },
+    {
+      "role": "user",
+      "content": "Abre Chrome y busca la hora actual en venezuela",
+      "timestamp": "2026-08-13T12:31:55.614371+00:00"
+    },
+    {
+      "role": "user",
+      "content": "Vuelvelo a hacer",
+      "timestamp": "2026-08-13T12:32:40.037736+00:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Enseguida, señor. Repito la acción anterior.",
+      "timestamp": "2026-08-13T12:32:40.038817+00:00"
+    },
+    {
+      "role": "user",
+      "content": "crea una nota .txt donde diga los pasos de como crear una pagina web",
+      "timestamp": "2026-08-13T12:35:25.341947+00:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Me temo que el servicio de IA no responde, señor. Modo básico activado.",
+      "timestamp": "2026-08-13T12:35:29.436151+00:00"
+    },
+    {
+      "role": "user",
+      "content": "Hola, ¿quién eres?",
+      "timestamp": "2026-08-13T12:39:44.681158+00:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Me temo que el servicio de IA no responde, señor. Modo básico activado.",
+      "timestamp": "2026-08-13T12:39:48.802754+00:00"
+    },
+    {
+      "role": "user",
+      "content": "Hola, ¿quién eres?",
+      "timestamp": "2026-08-13T14:27:12.420226+00:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Me temo que el servicio de IA no responde, señor. Modo básico activado.",
+      "timestamp": "2026-08-13T14:27:16.522915+00:00"
+    },
+    {
+      "role": "user",
+      "content": "hola",
+      "timestamp": "2026-08-13T14:28:49.935846+00:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Me temo que el servicio de IA no responde, señor. Modo básico activado.",
+      "timestamp": "2026-08-13T14:28:54.019135+00:00"
+    },
+    {
+      "role": "user",
+      "content": "hola",
+      "timestamp": "2026-08-13T14:29:18.861404+00:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Me temo que el servicio de IA no responde, señor. Modo básico activado.",
+      "timestamp": "2026-08-13T14:29:22.955194+00:00"
+    },
+    {
+      "role": "user",
+      "content": "hola",
+      "timestamp": "2026-08-13T14:30:24.504968+00:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Me temo que el servicio de IA no responde, señor. Modo básico activado.",
+      "timestamp": "2026-08-13T14:30:28.626335+00:00"
+    },
+    {
+      "role": "user",
+      "content": "Hola, ¿quién eres?",
+      "timestamp": "2026-08-13T14:31:57.168080+00:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Entendido, señor.",
+      "timestamp": "2026-08-13T14:32:30.211562+00:00"
+    },
+    {
+      "role": "user",
+      "content": "que hora es",
+      "timestamp": "2026-08-13T14:33:03.828275+00:00"
+    },
+    {
+      "role": "assistant",
+      "content": "Entendido.",
+      "timestamp": "2026-08-13T14:33:10.437084+00:00"
+    }
+  ],
+  "long_term": [],
+  "preferences": {},
+  "frequent_actions": {
+    "create_folder:{\"path\": \"/Escritorio/prueba_jarvis\"}": 1,
+    "open_app:{\"name\": \"Google Chrome\"}": 2,
+    "type_text:{\"text\": \"hora actual\"}": 1,
+    "open_app:{\"name\": \"Chrome y busca la hora actual en venezuela\"}": 2
+  },
+  "last_plan": {
+    "steps": [
+      {
+        "tool": "open_app",
+        "params": {
+          "name": "Chrome y busca la hora actual en venezuela"
+        },
+        "description": "Abrir Chrome y busca la hora actual en venezuela"
+      }
+    ],
+    "reasoning": "Modo básico: abrir aplicación",
+    "timestamp": "2026-08-13T12:32:40.072450+00:00"
+  }
+}
