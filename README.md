@@ -1,6 +1,6 @@
 # JARVIS — Asistente Virtual estilo Iron Man
 
-Asistente de escritorio modular en Python con conversación natural, control de PC y degradación elegante. Funciona **100% por texto** sin instalar dependencias de voz.
+Asistente de escritorio modular en Python con conversación natural, control de PC y degradación elegante. Funciona **100% por terminal** sin interfaz web ni dependencias de voz obligatorias.
 
 ## Requisitos
 
@@ -8,26 +8,57 @@ Asistente de escritorio modular en Python con conversación natural, control de 
 - **Python 3.11+**
 - Conexión a internet (solo si usa OpenAI/Anthropic; Ollama funciona offline)
 
-## Instalación rápida (PowerShell)
+## Instalación rápida
+
+### Windows (PowerShell)
 
 ```powershell
-cd "C:\Users\HomePC\Documents\Asistente 3.0\jarvis"
+# Navega a la carpeta del proyecto (ajusta la ruta según donde lo tengas)
+cd "C:\Ruta\A\Tu\Proyecto\jarvis"
+
+# Ejecuta el script de instalación
 .\scripts\setup.ps1
 ```
 
-El script `setup.ps1`:
+### Linux/macOS (Bash)
+
+```bash
+cd /ruta/a/tu/proyecto/jarvis
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env 2>/dev/null || echo "Crea tu archivo .env manualmente"
+```
+
+El script `setup.ps1` (Windows) realiza:
 1. Crea un entorno virtual `.venv`
 2. Instala `requirements.txt` (sin voz)
 3. Copia `.env.example` → `.env` si no existe
 
-### Instalación manual
+### Instalación manual (cualquier sistema)
 
 ```powershell
+# 1. Clona o navega al directorio del proyecto
 cd jarvis
+
+# 2. Crea entorno virtual
 python -m venv .venv
+
+# 3. Activa el entorno
+# Windows PowerShell:
 .\.venv\Scripts\Activate.ps1
+# Windows CMD:
+.venv\Scripts\activate.bat
+# Linux/macOS:
+source .venv/bin/activate
+
+# 4. Instala dependencias
 pip install -r requirements.txt
-copy .env.example .env
+
+# 5. Copia el archivo de ejemplo (opcional)
+copy .env.example .env   # Windows PowerShell
+# o
+cp .env.example .env     # Linux/macOS
 ```
 
 ## Configuración (.env)
@@ -80,20 +111,6 @@ python main.py --dry-run
 
 Genera planes y muestra el JSON del LLM **sin ejecutar nada** en el sistema.
 
-### Chat web
-
-```powershell
-python main.py --web
-```
-
-Abre un chat en el navegador: **http://localhost:8000**
-
-Combina con otros modos:
-
-```powershell
-python main.py --web --dry-run
-```
-
 ### Modo voz (opcional)
 
 Requiere dependencias extra:
@@ -116,6 +133,7 @@ python main.py --input-mode hybrid
 | `ayuda` | Lista capacidades (modo básico) |
 | `/rutinas` o `rutinas` | Muestra patrones detectados |
 | `salir` / `hasta luego` | Cierra JARVIS |
+| `/diag` | Re-ejecuta diagnóstico del LLM |
 
 ## Modo básico (sin LLM)
 
@@ -156,7 +174,6 @@ jarvis/
 │   └── subsystems.py    # Chequeo de módulos
 ├── action/              # Control de PC
 ├── perception/          # Entrada texto/voz
-├── ui/web_chat.py       # Chat web
 ├── security/guard.py    # Whitelist y confirmaciones
 ├── scripts/setup.ps1    # Instalador Windows
 └── tests/test_safe.py   # Tests seguros
@@ -177,3 +194,9 @@ jarvis/
 | Error de micrófono | Use `JARVIS_INPUT_MODE=text` (default) |
 | Ollama no responde | Verifique que `ollama serve` esté corriendo |
 | PyAudio falla | Solo necesario para voz; omita `requirements-voice.txt` |
+
+## Notas importantes
+
+- **JARVIS es una aplicación de terminal**: No abre servidores web ni tiene interfaz gráfica. Toda la interacción ocurre en la consola.
+- **La ruta de instalación es relativa**: No uses rutas absolutas como `C:\Users\HomePC\Documents\...` en la documentación. Cada usuario debe navegar a su propia carpeta del proyecto.
+- **Web eliminado**: La funcionalidad de chat web (`--web`) ha sido removida. JARVIS ahora es exclusivamente un asistente de terminal conversacional.
