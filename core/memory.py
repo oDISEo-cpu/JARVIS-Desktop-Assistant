@@ -61,6 +61,11 @@ class Memory:
         }
         self._load()
         self._init_routines_db()
+        
+        # Contexto persistente (nuevo)
+        from config import DATA_DIR
+        from core.context import UserContext
+        self.user_context = UserContext(DATA_DIR)
 
     def _init_routines_db(self) -> None:
         """Crea la tabla de acciones para detección de rutinas."""
@@ -305,3 +310,41 @@ class Memory:
     def has_last_plan(self) -> bool:
         """Indica si existe un plan previo repetible."""
         return self.get_last_plan() is not None
+
+    # ── Métodos de contexto de usuario (nuevos) ───────────────────────────────
+
+    def set_user_preference(self, key: str, value: Any) -> None:
+        """Establece una preferencia del usuario (ej. editor, navegador)."""
+        self.user_context.set_preference(key, value)
+
+    def get_user_preference(self, key: str, default: Any = None) -> Any:
+        """Obtiene una preferencia del usuario."""
+        return self.user_context.get_preference(key, default)
+
+    def add_project(self, name: str, path: str, description: str = "") -> None:
+        """Registra un proyecto activo del usuario."""
+        self.user_context.add_project(name, path, description)
+
+    def get_projects(self) -> list[dict[str, Any]]:
+        """Devuelve lista de proyectos activos."""
+        return self.user_context.get_projects()
+
+    def add_session_note(self, note: str) -> None:
+        """Añade una nota temporal de la sesión actual."""
+        self.user_context.add_session_note(note)
+
+    def get_session_notes(self) -> list[str]:
+        """Recupera notas recientes de la sesión."""
+        return self.user_context.get_session_notes()
+
+    def get_context_summary(self) -> str:
+        """Devuelve resumen formateado del contexto del usuario."""
+        return self.user_context.get_summary()
+
+    def learn_pattern(self, pattern: str, trigger: str, action: str) -> None:
+        """Registra un patrón aprendido del comportamiento del usuario."""
+        self.user_context.learn_pattern(pattern, trigger, action)
+
+    def get_learned_patterns(self) -> list[dict[str, Any]]:
+        """Devuelve patrones de comportamiento aprendidos."""
+        return self.user_context.get_learned_patterns()

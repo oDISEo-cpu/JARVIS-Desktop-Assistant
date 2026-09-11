@@ -10,7 +10,7 @@ import argparse
 import json
 import sys
 import traceback
-from typing import Any
+from typing import Any, Optional
 
 from config import (
     EXIT_PHRASES,
@@ -29,6 +29,13 @@ from perception.reader import ChatReader
 from security.guard import SecurityGuard
 from ui.console_ui import ConsoleUI
 
+# Importación opcional del módulo GUI
+try:
+    from gui.tray import JarvisTray
+    GUI_AVAILABLE = True
+except ImportError:
+    GUI_AVAILABLE = False
+
 
 class JarvisAssistant:
     """Orquestador principal del asistente JARVIS."""
@@ -37,9 +44,11 @@ class JarvisAssistant:
         self,
         input_mode: str | None = None,
         dry_run: bool = False,
+        gui_mode: bool = False,
     ) -> None:
         self.input_mode = input_mode or INPUT_MODE
         self.dry_run = dry_run
+        self.gui_mode = gui_mode and GUI_AVAILABLE
 
         self.ui = ConsoleUI()
         self.chat = ChatReader(console=self.ui.console)
@@ -64,6 +73,7 @@ class JarvisAssistant:
         self._speaker: Any = None
         self._listener: Any = None
         self._running = False
+        self._tray: Optional[JarvisTray] = None
 
     def _load_voice_modules(self) -> None:
         """Carga módulos de voz solo si el modo lo requiere."""
@@ -155,6 +165,15 @@ class JarvisAssistant:
 
         self._load_voice_modules()
 
+        # Inicializar GUI si está habilitado
+        if self.gui_mode:
+            self._init_gui()
+
+        # Mostrar resumen de contexto del usuario (nuevo)
+        context_summary = self.memory.get_context_summary()
+        if "(Sin contexto guardado)" not in context_summary:
+            self.chat.add_system_message(context_summary)
+
         suggestion = self.memory.get_startup_suggestion()
         greeting = GREETING
         if suggestion:
@@ -162,6 +181,15 @@ class JarvisAssistant:
         self.chat.add_jarvis_message(greeting)
         if self.speaker_available and self.input_mode != "text":
             self._speaker.speak_async(greeting.split("\n")[0])
+
+    def _init_gui(self) -> None:
+        """Inicializa el widget de la bandeja del sistema con la esfera reactiva."""
+        try:
+            self._tray = JarvisTray(self)
+            self.chat.add_system_message("🖥️ Widget de escritorio activado. Revisa la bandeja del sistema.")
+        except Exception as e:
+            self.chat.add_system_message(f"⚠️ No se pudo iniciar el widget GUI: {e}")
+            self.gui_mode = False
 
     def _should_exit(self, text: str) -> bool:
         text_lower = text.lower().strip()
@@ -249,9 +277,20 @@ class JarvisAssistant:
 
         self.chat.add_jarvis_message(final_message)
 
+        # Actualizar estado de la esfera GUI si está disponible
+        if self.gui_mode and self._tray:
+            self._tray.update_state('speaking')
+
         if self.speaker_available and self.input_mode != "text":
             short = safe_message.split("\n")[0]
             self._speaker.speak_async(short)
+
+        # Resetear estado de la esfera después de responder
+        if self.gui_mode and self._tray:
+            # Pequeño delay para volver a idle (en producción usar QTimer.singleShot)
+            import time
+            time.sleep(0.5)
+            self._tray.update_state('idle')
 
         return True
 
@@ -302,6 +341,10 @@ def parse_args() -> argparse.Namespace:
         "--dry-run", action="store_true",
         help="Genera planes sin ejecutar acciones",
     )
+    parser.add_argument(
+        "--gui", action="store_true",
+        help="Activa el widget de escritorio con esfera reactiva (requiere PyQt6)",
+    )
     return parser.parse_args()
 
 
@@ -311,8 +354,13 @@ def main() -> None:
     assistant = JarvisAssistant(
         input_mode=args.input_mode,
         dry_run=args.dry_run,
+        gui_mode=args.gui,
     )
     assistant.run()
+    
+    # Si el GUI está activo, ejecutar su loop al final
+    if assistant.gui_mode and assistant._tray:
+        assistant._tray.run()
 
 
 if __name__ == "__main__":

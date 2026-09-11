@@ -1,0 +1,54 @@
+{
+  "preferences": {
+    "editor": "VSCode",
+    "browser": "Firefox",
+    "project_dirs": [],
+    "favorite_apps": [],
+    "terminal": "Windows Terminal"
+  },
+  "active_projects": [
+    {
+      "name": "JARVIS",
+      "path": "/workspace/jarvis",
+      "description": "Asistente personal",
+      "added_at": "2026-09-11T08:21:08.521053"
+    },
+    {
+      "name": "TestProject",
+      "path": "/tmp/test",
+      "description": "Proyecto de prueba",
+      "added_at": "2026-09-11T08:23:01.457575"
+    },
+    {
+      "name": "MiApp",
+      "path": "/home/user/miapp",
+      "description": "Aplicación principal",
+      "added_at": "2026-09-11T08:23:14.183717"
+    },
+    {
+      "name": "Blog",
+      "path": "/home/user/blog",
+      "description": "Sitio personal",
+      "added_at": "2026-09-11T08:23:14.183976"
+    }
+  ],
+  "session_notes": [
+    {
+      "note": "Reunión a las 15:00",
+      "timestamp": "2026-09-11T08:23:14.184335"
+    },
+    {
+      "note": "Recordar actualizar documentación",
+      "timestamp": "2026-09-11T08:23:14.184749"
+    }
+  ],
+  "learned_patterns": [
+    {
+      "pattern": "abrir_espacio_trabajo",
+      "trigger": "8:00 AM",
+      "action": "abrir vscode, chrome, spotify",
+      "learned_at": "2026-09-11T08:23:14.185131"
+    }
+  ],
+  "last_updated": "2026-09-11T08:23:14.185136"
+}

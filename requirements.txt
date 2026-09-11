@@ -38,3 +38,7 @@ plyer>=2.1.0
 
 # Tests
 pytest>=8.0.0
+
+# GUI Opcional: Widget de escritorio con esfera reactiva
+# Instalar solo si se usa --gui: pip install PyQt6
+PyQt6>=6.6.0; extra == "gui"
