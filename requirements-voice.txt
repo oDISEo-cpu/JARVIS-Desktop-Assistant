@@ -1,7 +1,0 @@
-# Dependencias opcionales de voz (instalar solo si usa modo voice/hybrid)
-# pip install -r requirements-voice.txt
-
-SpeechRecognition>=3.10.4
-pyttsx3>=2.90
-pyaudio>=0.2.14; platform_system=="Windows"
-pvporcupine>=3.0.2
