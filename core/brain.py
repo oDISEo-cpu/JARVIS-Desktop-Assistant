@@ -682,6 +682,14 @@ class Brain:
 
         cmd = user_message.strip().lower()
 
+        # Comando especial: contexto (nuevo)
+        if cmd in ("contexto", "/contexto", "mi contexto"):
+            return BrainResponse(
+                type="conversation",
+                message=self._memory.get_context_summary(),
+                reasoning="Mostrando contexto del usuario",
+            )
+
         # Comando especial: rutinas
         if cmd in ("rutinas", "/rutinas"):
             return BrainResponse(
